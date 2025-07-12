@@ -29,6 +29,8 @@ const Login = () => {
     setError('');
 
     try {
+      console.log('Attempting unified login with:', form);
+      
       // Determine if input is email or username
       const isEmail = form.usernameOrEmail.includes('@');
       const loginData = {
@@ -36,13 +38,50 @@ const Login = () => {
         ...(isEmail ? { email: form.usernameOrEmail } : { username: form.usernameOrEmail })
       };
 
+      console.log('Login data being sent:', loginData);
+      
+      // Use unified login endpoint
       const response = await authService.login(loginData);
-
+      
       if (response.success) {
-        // Store token and redirect
+        console.log('Login successful:', response);
+        console.log('Response userType:', response.userType);
+        console.log('Response redirectTo:', response.redirectTo);
+        
+        // Store token and user data consistently
+        localStorage.setItem('token', response.token);
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
-        navigate('/dashboard');
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userType', response.userType);
+        
+        // Set admin flag if admin login
+        if (response.userType === 'admin') {
+          localStorage.setItem('isAdmin', 'true');
+          console.log('Set isAdmin flag to true');
+        } else {
+          localStorage.removeItem('isAdmin');
+          console.log('Removed isAdmin flag');
+        }
+        
+        // Verify localStorage data
+        console.log('Stored localStorage data:', {
+          token: !!localStorage.getItem('token'),
+          userType: localStorage.getItem('userType'),
+          isAdmin: localStorage.getItem('isAdmin'),
+          user: JSON.parse(localStorage.getItem('user') || '{}')
+        });
+        
+        // Redirect based on response redirectTo or user role
+        const redirectPath = response.redirectTo || 
+          (response.userType === 'admin' ? '/admin' : '/dashboard');
+        
+        console.log(`Redirecting ${response.userType} to:`, redirectPath);
+        
+        // Force a small delay to ensure localStorage is set
+        setTimeout(() => {
+          navigate(redirectPath);
+        }, 100);
       } else {
         setError(response.message || 'Login failed');
       }
@@ -58,7 +97,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-card">
         <form onSubmit={handleLogin} className="login-form">
-
+          
           {/* Logo and Header */}
           <div className="logo-container">
             <img src={logo} alt="ReWear Logo" className="logo-image" />
@@ -66,21 +105,21 @@ const Login = () => {
             <p className="subtitle">Sign in to your ReWear account</p>
           </div>
 
-          {/* Username/Email */}
-          <div className="form-group">
-            <label className="form-label">
-              Username or Email
-            </label>
-            <input
-              type="text"
-              name="usernameOrEmail"
-              value={form.usernameOrEmail}
-              onChange={handleChange}
-              placeholder="Enter your username or email"
-              className="form-input"
-              required
-            />
-          </div>
+        {/* Username/Email */}
+        <div className="form-group">
+          <label className="form-label">
+            Username or Email
+          </label>
+          <input
+            type="text"
+            name="usernameOrEmail"
+            value={form.usernameOrEmail}
+            onChange={handleChange}
+            placeholder="Enter your username or email"
+            className="form-input"
+            required
+          />
+        </div>
 
           {/* Password */}
           <div className="form-group">
@@ -99,14 +138,14 @@ const Login = () => {
           {/* Error Message */}
           {error && <p className="error-text">{error}</p>}
 
-          {/* Login Button */}
-          <button
-            type="submit"
-            className="submit-button"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Signing In...' : 'Sign In'}
-          </button>
+        {/* Login Button */}
+        <button
+          type="submit"
+          className="submit-button"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Signing In...' : 'Sign In'}
+        </button>
 
           {/* Signup Link */}
           <div className="signup-link-container">

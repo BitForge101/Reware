@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Admin = require('../models/admin');
 
 // Authentication middleware
 const authenticateToken = async (req, res, next) => {
@@ -15,17 +16,45 @@ const authenticateToken = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Token decoded:', decoded);
     
-    // Get user from database
-    const user = await User.findById(decoded.id).select('-password');
-    if (!user) {
+    // Handle unified token structure
+    if (decoded.userType === 'admin') {
+      const admin = await Admin.findById(decoded.id).select('-password');
+      if (!admin) {
+        return res.status(401).json({ 
+          success: false,
+          message: 'Invalid admin token' 
+        });
+      }
+      req.user = admin;
+      req.user.userType = 'admin';
+      req.user.isAdmin = true;
+    } else if (decoded.userType === 'user' || !decoded.userType) {
+      // Handle both new userType structure and old structure
+      const user = await User.findById(decoded.id).select('-password');
+      if (!user) {
+        return res.status(401).json({ 
+          success: false,
+          message: 'Invalid user token' 
+        });
+      }
+      req.user = user;
+      req.user.userType = 'user';
+      req.user.isAdmin = false;
+    } else {
       return res.status(401).json({ 
         success: false,
-        message: 'Invalid token' 
+        message: 'Invalid token structure' 
       });
     }
 
-    req.user = user;
+    console.log('Authenticated user:', { 
+      id: req.user._id, 
+      userType: req.user.userType, 
+      role: req.user.role 
+    });
+
     next();
   } catch (error) {
     console.error('Auth middleware error:', error);
@@ -64,7 +93,12 @@ const requireAdmin = (req, res, next) => {
     });
   }
 
-  if (req.user.role !== 'admin') {
+  // Check if user is admin by userType or role
+  const isAdmin = req.user.userType === 'admin' || 
+                  req.user.role === 'admin' || 
+                  req.user.role === 'superadmin';
+
+  if (!isAdmin) {
     return res.status(403).json({ 
       success: false,
       message: 'Admin access required' 

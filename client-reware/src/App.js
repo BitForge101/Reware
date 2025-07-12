@@ -6,9 +6,9 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import Dashboard from './pages/dashboard';
 import UserDashboard from './pages/UserDashboard';
-import UploadItem from './pages/UploadItem';
-import ItemDetails from './pages/ItemDetails';
+import AdminDashboard from './pages/adminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
 
 function App() {
   return (
@@ -34,19 +34,11 @@ function App() {
         }
       />
       <Route
-        path="/upload-item"
+        path="/admin"
         element={
-          <ProtectedRoute>
-            <UploadItem />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/item/:itemId"
-        element={
-          <ProtectedRoute>
-            <ItemDetails />
-          </ProtectedRoute>
+          <AdminProtectedRoute>
+            <AdminDashboard />
+          </AdminProtectedRoute>
         }
       />
       {/* Add more protected routes here */}
