@@ -6,7 +6,7 @@ import blazer from '../images/blazer.jpeg';
 import dress from '../images/dress.jpeg'
 import shirt from '../images/shirt.jpeg';
 import suit from '../images/suit.jpg';
-import tshirt from '../images/tshirt.jpeg';
+import tshirt from '../images/t-shirt.jpeg';
 import pant from '../images/pant.jpg';
 import night from '../images/night.jpeg';
 import top from '../images/top.jpeg';
