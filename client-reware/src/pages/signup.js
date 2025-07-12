@@ -153,7 +153,10 @@ const Signup = () => {
       
       if (response.success) {
         alert('Account created successfully! Welcome to ReWear!');
-        navigate('/login');
+        // Store token and redirect to dashboard
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        navigate('/dashboard');
       }
       
     } catch (error) {
