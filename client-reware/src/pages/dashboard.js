@@ -114,18 +114,15 @@ const Dashboard = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       // Navigate to a search results page or filter current items
-      console.log('Searching for:', searchQuery);
       // You can implement search navigation here
     }
   };
 
   const handleCategoryClick = (categoryName) => {
-    console.log('Category clicked:', categoryName);
     // Navigate to category page or filter items
   };
 
   const handleItemClick = (itemId) => {
-    console.log('Item clicked:', itemId);
     // Navigate to item detail page
     navigate(`/item/${itemId}`);
   };
@@ -150,11 +147,6 @@ const Dashboard = () => {
   };
 
   const showLocalStorageData = () => {
-    console.log('=== LOCAL STORAGE DATA ===');
-    console.log('Token:', localStorage.getItem('token'));
-    console.log('User Data:', localStorage.getItem('user'));
-    console.log('Parsed User:', JSON.parse(localStorage.getItem('user') || '{}'));
-
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     alert(`Local Storage Data:
     

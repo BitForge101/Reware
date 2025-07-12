@@ -29,8 +29,6 @@ const Login = () => {
     setError('');
 
     try {
-      console.log('Attempting login with:', form);
-      
       // Determine if input is email or username
       const isEmail = form.usernameOrEmail.includes('@');
       const loginData = {
@@ -38,12 +36,9 @@ const Login = () => {
         ...(isEmail ? { email: form.usernameOrEmail } : { username: form.usernameOrEmail })
       };
 
-      console.log('Login data being sent:', loginData);
-      
       const response = await authService.login(loginData);
-      
+
       if (response.success) {
-        console.log('Login successful:', response);
         // Store token and redirect
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
@@ -63,7 +58,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-card">
         <form onSubmit={handleLogin} className="login-form">
-          
+
           {/* Logo and Header */}
           <div className="logo-container">
             <img src={logo} alt="ReWear Logo" className="logo-image" />
@@ -71,21 +66,21 @@ const Login = () => {
             <p className="subtitle">Sign in to your ReWear account</p>
           </div>
 
-        {/* Username/Email */}
-        <div className="form-group">
-          <label className="form-label">
-            Username or Email
-          </label>
-          <input
-            type="text"
-            name="usernameOrEmail"
-            value={form.usernameOrEmail}
-            onChange={handleChange}
-            placeholder="Enter your username or email"
-            className="form-input"
-            required
-          />
-        </div>
+          {/* Username/Email */}
+          <div className="form-group">
+            <label className="form-label">
+              Username or Email
+            </label>
+            <input
+              type="text"
+              name="usernameOrEmail"
+              value={form.usernameOrEmail}
+              onChange={handleChange}
+              placeholder="Enter your username or email"
+              className="form-input"
+              required
+            />
+          </div>
 
           {/* Password */}
           <div className="form-group">
@@ -104,14 +99,14 @@ const Login = () => {
           {/* Error Message */}
           {error && <p className="error-text">{error}</p>}
 
-        {/* Login Button */}
-        <button
-          type="submit"
-          className="submit-button"
-          disabled={isLoading}
-        >
-          {isLoading ? 'Signing In...' : 'Sign In'}
-        </button>
+          {/* Login Button */}
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Signing In...' : 'Sign In'}
+          </button>
 
           {/* Signup Link */}
           <div className="signup-link-container">

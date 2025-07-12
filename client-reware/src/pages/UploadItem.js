@@ -25,7 +25,6 @@ const UploadItem = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Here you would typically upload to your backend
-        console.log('Uploading item:', formData);
         alert('Item uploaded successfully!');
         navigate('/user-dashboard');
     };
