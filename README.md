@@ -9,3 +9,6 @@ Reware is a web-based platform that enables users to exchange unused clothing th
 - [Banti Patel](https://github.com/Bantipatel20)
 - [Dhaval Patel](https://github.com/dsp2810)
 - [Prince Lad](https://github.com/Princelad)
+ 
+# Email
+23cs058@charusat.edu.in
