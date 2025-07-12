@@ -200,7 +200,7 @@ const Signup = () => {
                   value={form.firstName}
                   onChange={handleChange}
                   className={`form-input ${errors.firstName ? 'error' : ''}`}
-                  placeholder="John"
+                  placeholder="..."
                 />
                 {errors.firstName && <p className="error-text">{errors.firstName}</p>}
               </div>
@@ -215,7 +215,7 @@ const Signup = () => {
                   value={form.lastName}
                   onChange={handleChange}
                   className={`form-input ${errors.lastName ? 'error' : ''}`}
-                  placeholder="Doe"
+                  placeholder="..."
                 />
                 {errors.lastName && <p className="error-text">{errors.lastName}</p>}
               </div>
@@ -232,7 +232,7 @@ const Signup = () => {
                 value={form.email}
                 onChange={handleChange}
                 className={`form-input ${errors.email ? 'error' : ''}`}
-                placeholder="john.doe@example.com"
+                placeholder="...@example.com"
               />
               {errors.email && <p className="error-text">{errors.email}</p>}
             </div>
@@ -248,7 +248,7 @@ const Signup = () => {
                 value={form.username}
                 onChange={handleChange}
                 className={`form-input ${errors.username ? 'error' : ''}`}
-                placeholder="johndoe123"
+                placeholder="exapmle"
               />
               {errors.username && <p className="error-text">{errors.username}</p>}
             </div>
@@ -326,7 +326,7 @@ const Signup = () => {
                 value={form.phoneNumber}
                 onChange={handleChange}
                 className={`form-input ${errors.phoneNumber ? 'error' : ''}`}
-                placeholder="+1 (555) 123-4567"
+                placeholder=""
               />
               {errors.phoneNumber && <p className="error-text">{errors.phoneNumber}</p>}
             </div>
