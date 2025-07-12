@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
 import './signup.css';
+import logo from '../images/logo.jpg'
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -185,10 +186,8 @@ const Signup = () => {
         <div className="signup-header">
           {/* Logo and Header */}
           <div className="logo-container">
-            <div className="logo-icon">
-              <svg className="user-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+            <div className="logo-image">
+                <img src={logo} alt="ReWear Logo" className="signup-logo" />
             </div>
             <h2 className="title">Create Account</h2>
             <p className="subtitle">Join ReWear and start your sustainable fashion journey</p>
