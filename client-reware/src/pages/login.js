@@ -1,7 +1,8 @@
 // client/src/pages/Login.jsx
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import './login.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,54 +32,78 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleLogin}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm flex flex-col items-center"
-      >
-        {/* Logo at the top */}
-        <img
-          src="/logo.png"
-          alt="ReWear Logo"
-          className="w-20 h-20 mb-6"
-        />
-
-        <h2 className="text-xl font-semibold mb-6 text-gray-700">Login to ReWear</h2>
+    <div className="login-container">
+      <div className="login-card">
+        <form
+          onSubmit={handleLogin}
+          className="login-form"
+        >
+          {/* Logo and Header */}
+          <div className="logo-container">
+            <div className="logo-icon">
+              <svg className="user-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h2 className="title">Welcome Back</h2>
+            <p className="subtitle">Sign in to your ReWear account</p>
+          </div>
 
         {/* Username */}
-        <input
-          type="text"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-          placeholder="Username"
-          className="w-full border border-gray-300 p-2 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
-          required
-        />
+        <div className="form-group">
+          <label className="form-label">
+            Username
+          </label>
+          <input
+            type="text"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            placeholder="Enter your username"
+            className="form-input"
+            required
+          />
+        </div>
 
         {/* Password */}
-        <input
-          type="password"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-          placeholder="Password"
-          className="w-full border border-gray-300 p-2 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
-          required
-        />
+        <div className="form-group">
+          <label className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Enter your password"
+            className="form-input"
+            required
+          />
+        </div>
 
         {/* Error message */}
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {/* Login Button */}
         <button
           type="submit"
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+          className="submit-button"
         >
-          Login
+          Sign In
         </button>
+
+        {/* Signup Link */}
+        <div className="signup-link-container">
+          <p className="signup-text">
+            Don't have an account?{' '}
+            <Link to="/signup" className="signup-link">
+              Create one here
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
+  </div>
   );
 };
 
