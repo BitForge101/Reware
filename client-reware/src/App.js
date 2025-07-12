@@ -6,7 +6,9 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import Dashboard from './pages/dashboard';
 import UserDashboard from './pages/UserDashboard';
+import AdminDashboard from './pages/adminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
 
 function App() {
   return (
@@ -29,6 +31,14 @@ function App() {
           <ProtectedRoute>
             <UserDashboard />
           </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <AdminProtectedRoute>
+            <AdminDashboard />
+          </AdminProtectedRoute>
         }
       />
       {/* Add more protected routes here */}

@@ -216,6 +216,23 @@ User ID: ${userData._id}`);
             <button onClick={showLocalStorageData} className="debug-button">
               Debug Info
             </button>
+            {user?.role === 'admin' && (
+              <button 
+                onClick={() => navigate('/admin')} 
+                className="admin-button"
+                style={{
+                  backgroundColor: '#A695FF',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontWeight: '500'
+                }}
+              >
+                Admin Panel
+              </button>
+            )}
             <button onClick={handleLogout} className="logout-button">
               Logout
             </button>

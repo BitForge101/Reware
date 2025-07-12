@@ -20,22 +20,72 @@ class AuthService {
     }
   }
 
-  // Login user
+  // Unified login for both users and admins
   async login(credentials) {
     try {
+      console.log('🔐 Attempting unified login with:', credentials);
       const response = await api.post('/api/auth/login', credentials);
+      console.log('🔐 Unified login response:', response);
       
       if (response.success && response.token) {
+        console.log('✅ Login successful, storing data...');
         // Store token and user data
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userType', response.userType);
+        
+        // Set admin flag if admin login
+        if (response.userType === 'admin') {
+          localStorage.setItem('isAdmin', 'true');
+        } else {
+          localStorage.removeItem('isAdmin');
+        }
+        
+        console.log('✅ User data stored in localStorage');
       }
       
       return response;
     } catch (error) {
+      console.error('❌ Login error:', error);
       throw new Error(error.message || 'Login failed');
     }
+  }
+
+  // Admin login
+  async adminLogin(credentials) {
+    try {
+      console.log('🔐 Attempting admin login with:', credentials);
+      const response = await api.post('/api/admin/login', credentials);
+      console.log('🔐 Admin login response:', response);
+      
+      if (response.success && response.token) {
+        console.log('✅ Admin login successful, storing data...');
+        // Store token and admin data
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.admin));
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('isAdmin', 'true');
+        console.log('✅ Admin data stored in localStorage');
+      }
+      
+      return response;
+    } catch (error) {
+      console.error('❌ Admin login error:', error);
+      throw new Error(error.message || 'Admin login failed');
+    }
+  }
+
+  // Check if user is admin
+  isAdmin() {
+    const userType = localStorage.getItem('userType');
+    const userData = this.getCurrentUser();
+    return userType === 'admin' || (userData && (userData.role === 'admin' || userData.role === 'superadmin'));
+  }
+
+  // Get user type
+  getUserType() {
+    return localStorage.getItem('userType') || 'user';
   }
 
   // Logout user
@@ -43,6 +93,9 @@ class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('userType');
+    localStorage.removeItem('authToken');
   }
 
   // Check if user is authenticated

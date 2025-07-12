@@ -29,7 +29,7 @@ const Login = () => {
     setError('');
 
     try {
-      console.log('Attempting login with:', form);
+      console.log('Attempting unified login with:', form);
       
       // Determine if input is email or username
       const isEmail = form.usernameOrEmail.includes('@');
@@ -40,14 +40,48 @@ const Login = () => {
 
       console.log('Login data being sent:', loginData);
       
+      // Use unified login endpoint
       const response = await authService.login(loginData);
       
       if (response.success) {
         console.log('Login successful:', response);
-        // Store token and redirect
+        console.log('Response userType:', response.userType);
+        console.log('Response redirectTo:', response.redirectTo);
+        
+        // Store token and user data consistently
+        localStorage.setItem('token', response.token);
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
-        navigate('/dashboard');
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userType', response.userType);
+        
+        // Set admin flag if admin login
+        if (response.userType === 'admin') {
+          localStorage.setItem('isAdmin', 'true');
+          console.log('Set isAdmin flag to true');
+        } else {
+          localStorage.removeItem('isAdmin');
+          console.log('Removed isAdmin flag');
+        }
+        
+        // Verify localStorage data
+        console.log('Stored localStorage data:', {
+          token: !!localStorage.getItem('token'),
+          userType: localStorage.getItem('userType'),
+          isAdmin: localStorage.getItem('isAdmin'),
+          user: JSON.parse(localStorage.getItem('user') || '{}')
+        });
+        
+        // Redirect based on response redirectTo or user role
+        const redirectPath = response.redirectTo || 
+          (response.userType === 'admin' ? '/admin' : '/dashboard');
+        
+        console.log(`Redirecting ${response.userType} to:`, redirectPath);
+        
+        // Force a small delay to ensure localStorage is set
+        setTimeout(() => {
+          navigate(redirectPath);
+        }, 100);
       } else {
         setError(response.message || 'Login failed');
       }

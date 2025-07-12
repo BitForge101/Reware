@@ -1,8 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const path = require('path');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const adminManagementRoutes = require('./routes/adminManagementRoutes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 // Load environment variables
@@ -26,6 +29,9 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Serve static files for uploaded images
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Request logging middleware (development only)
 if (process.env.NODE_ENV !== 'production') {
@@ -55,6 +61,8 @@ app.get('/', (req, res) => res.json({
   version: '1.0.0'
 }));
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminManagementRoutes);
 
 // Error handling middleware
 app.use(notFound);
