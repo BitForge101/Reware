@@ -6,6 +6,7 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import Dashboard from './pages/dashboard';
 import UserDashboard from './pages/UserDashboard';
+import UploadItem from './pages/UploadItem';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -28,6 +29,14 @@ function App() {
         element={
           <ProtectedRoute>
             <UserDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/upload-item"
+        element={
+          <ProtectedRoute>
+            <UploadItem />
           </ProtectedRoute>
         }
       />

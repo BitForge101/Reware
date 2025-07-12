@@ -35,7 +35,7 @@ const Dashboard = () => {
 
   const checkAuthentication = async () => {
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
       navigate('/login');
       return;
@@ -72,11 +72,11 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      
+
       // Fetch featured items
       const featuredResponse = await fetch(`${API_BASE}/items/featured?limit=6`);
       const featuredData = await featuredResponse.json();
-      
+
       if (featuredData.success) {
         setFeaturedItems(featuredData.data);
       }
@@ -84,7 +84,7 @@ const Dashboard = () => {
       // Fetch categories
       const categoriesResponse = await fetch(`${API_BASE}/items/categories`);
       const categoriesData = await categoriesResponse.json();
-      
+
       if (categoriesData.success) {
         setCategories(categoriesData.data);
       }
@@ -92,7 +92,7 @@ const Dashboard = () => {
       // Fetch recent items for the general grid
       const itemsResponse = await fetch(`${API_BASE}/items?limit=12&sortBy=createdAt&sortOrder=desc`);
       const itemsData = await itemsResponse.json();
-      
+
       if (itemsData.success) {
         setAllItems(itemsData.data);
       }
@@ -153,7 +153,7 @@ const Dashboard = () => {
     console.log('Token:', localStorage.getItem('token'));
     console.log('User Data:', localStorage.getItem('user'));
     console.log('Parsed User:', JSON.parse(localStorage.getItem('user') || '{}'));
-    
+
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     alert(`Local Storage Data:
     
