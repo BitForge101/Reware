@@ -1,10 +1,12 @@
 // client/src/pages/Signup.jsx
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import authService from '../services/authService';
 import './signup.css';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -133,32 +135,37 @@ const Signup = () => {
     setIsLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Prepare data for API
+      const signupData = {
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim(),
+        email: form.email.trim().toLowerCase(),
+        username: form.username.trim(),
+        password: form.password,
+        phoneNumber: form.phoneNumber.trim(),
+        dateOfBirth: form.dateOfBirth,
+        gender: form.gender
+      };
+
+      // Call API
+      const response = await authService.signup(signupData);
       
-      // Here you would typically make an API call to register the user
-      console.log('Signup form data:', form);
-      
-      // For now, just show success message
-      alert('Account created successfully! Please check your email to verify your account.');
-      
-      // Reset form
-      setForm({
-        firstName: '',
-        lastName: '',
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: '',
-        phoneNumber: '',
-        dateOfBirth: '',
-        gender: '',
-        agreeToTerms: false
-      });
+      if (response.success) {
+        alert('Account created successfully! Welcome to ReWear!');
+        navigate('/login');
+      }
       
     } catch (error) {
       console.error('Signup error:', error);
-      alert('An error occurred during signup. Please try again.');
+      
+      // Handle specific error messages
+      if (error.message.includes('Email already in use')) {
+        setErrors({ email: 'This email is already registered' });
+      } else if (error.message.includes('Username already taken')) {
+        setErrors({ username: 'This username is already taken' });
+      } else {
+        alert(error.message || 'An error occurred during signup. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -248,7 +255,7 @@ const Signup = () => {
                 value={form.username}
                 onChange={handleChange}
                 className={`form-input ${errors.username ? 'error' : ''}`}
-                placeholder="exapmle"
+                placeholder="example"
               />
               {errors.username && <p className="error-text">{errors.username}</p>}
             </div>
@@ -326,7 +333,7 @@ const Signup = () => {
                 value={form.phoneNumber}
                 onChange={handleChange}
                 className={`form-input ${errors.phoneNumber ? 'error' : ''}`}
-                placeholder=""
+                placeholder="+1 (555) 123-4567"
               />
               {errors.phoneNumber && <p className="error-text">{errors.phoneNumber}</p>}
             </div>

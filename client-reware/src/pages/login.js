@@ -2,32 +2,66 @@
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import authService from '../services/authService';
 import './login.css';
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    username: '',
+    usernameOrEmail: '',
     password: ''
   });
 
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear error when user starts typing
+    if (error) {
+      setError('');
+    }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Dummy login check
-    if (form.username === 'admin' && form.password === 'admin123') {
-      // Save dummy token or flag
-      localStorage.setItem('isLoggedIn', true);
-      navigate('/dashboard'); // redirect after login
-    } else {
-      setError('Invalid username or password');
+    if (!form.usernameOrEmail || !form.password) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      // Prepare login data
+      const loginData = {
+        password: form.password
+      };
+
+      // Check if input is email or username
+      const isEmail = form.usernameOrEmail.includes('@');
+      if (isEmail) {
+        loginData.email = form.usernameOrEmail.trim().toLowerCase();
+      } else {
+        loginData.username = form.usernameOrEmail.trim();
+      }
+
+      // Call API
+      const response = await authService.login(loginData);
+      
+      if (response.success) {
+        // Redirect to dashboard or home page
+        navigate('/dashboard');
+      }
+      
+    } catch (error) {
+      console.error('Login error:', error);
+      setError(error.message || 'Login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -49,17 +83,17 @@ const Login = () => {
             <p className="subtitle">Sign in to your ReWear account</p>
           </div>
 
-        {/* Username */}
+        {/* Username or Email */}
         <div className="form-group">
           <label className="form-label">
-            Username
+            Username or Email
           </label>
           <input
             type="text"
-            name="username"
-            value={form.username}
+            name="usernameOrEmail"
+            value={form.usernameOrEmail}
             onChange={handleChange}
-            placeholder="Enter your username"
+            placeholder="Enter your username or email"
             className="form-input"
             required
           />
@@ -87,9 +121,10 @@ const Login = () => {
         {/* Login Button */}
         <button
           type="submit"
-          className="submit-button"
+          disabled={isLoading}
+          className={`submit-button ${isLoading ? 'loading' : ''}`}
         >
-          Sign In
+          {isLoading ? 'Signing In...' : 'Sign In'}
         </button>
 
         {/* Signup Link */}

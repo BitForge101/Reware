@@ -1,14 +1,15 @@
 {
   "name": "server-reware",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "ReWear server application",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["reware", "fashion", "sustainability", "clothing", "swap"],
+  "author": "ReWear Team",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {

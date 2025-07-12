@@ -4,18 +4,28 @@
   "description": "Reware is a web-based platform that enables users to exchange unused clothing through direct swaps or a point-based redemption system. The goal is to promote sustainable fashion and reduce textile waste by encouraging users to reuse wearable garments instead of discarding them.",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cd server-reware && npm run dev",
+    "client:dev": "cd client-reware && npm start",
+    "server:start": "cd server-reware && npm start",
+    "client:start": "cd client-reware && npm start",
+    "install:all": "npm install && cd server-reware && npm install && cd ../client-reware && npm install",
+    "build": "cd client-reware && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BitForge101/Reware.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["reware", "fashion", "sustainability", "clothing", "swap", "marketplace"],
+  "author": "ReWear Team",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/BitForge101/Reware/issues"
   },
-  "homepage": "https://github.com/BitForge101/Reware#readme"
+  "homepage": "https://github.com/BitForge101/Reware#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
