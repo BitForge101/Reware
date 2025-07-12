@@ -171,136 +171,140 @@ const ItemDetails = () => {
 
             {/* Main Content */}
             <div className="item-details-content">
-                {/* Main Layout - Two Column */}
-                <div className="main-details-grid">
-                    {/* Left Column - Image Gallery */}
-                    <div className="image-gallery-section">
-                        <div className="main-image-container">
-                            {item.images && item.images.length > 0 ? (
-                                <>
-                                    <img
-                                        src={item.images[currentImageIndex]}
-                                        alt={item.name}
-                                        className="main-image"
-                                    />
-                                    {item.images.length > 1 && (
-                                        <>
-                                            <button
-                                                className="image-nav prev"
-                                                onClick={handlePreviousImage}
-                                            >
-                                                &#8249;
-                                            </button>
-                                            <button
-                                                className="image-nav next"
-                                                onClick={handleNextImage}
-                                            >
-                                                &#8250;
-                                            </button>
-                                        </>
-                                    )}
-                                </>
-                            ) : (
-                                <div className="add-images-placeholder">
-                                    <span className="placeholder-icon">📷</span>
-                                    <p>Add Images</p>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Image Thumbnails */}
-                        {item.images && item.images.length > 1 && (
-                            <div className="image-thumbnails">
-                                {item.images.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={image}
-                                        alt={`${item.name} ${index + 1}`}
-                                        className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
-                                        onClick={() => handleImageSelect(index)}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Right Column - Product Information */}
-                    <div className="product-info-section">
-                        {/* Availability Status */}
-                        <div className="availability-status">
-                            <button className={`availability-btn ${item.isAvailable ? 'available' : 'unavailable'}`}>
-                                {item.isAvailable ? 'Available/Swap' : 'Currently Unavailable'}
-                            </button>
-                        </div>
-
-                        {/* Product Description */}
-                        <div className={`product-description-box ${item ? 'has-content' : ''}`}>
-                            <h3>Add Product Description</h3>
-                            <div className="description-lines">
-                                <div className="description-line full"></div>
-                                <div className="description-line full"></div>
-                                <div className="description-line full"></div>
-                                <div className="description-line full"></div>
-                                <div className="description-line medium"></div>
-                                <div className="description-line full"></div>
-                                <div className="description-line full"></div>
-                                <div className="description-line short"></div>
-                            </div>
-
-                            {/* Actual Description Content */}
-                            {item && (
-                                <div className="actual-description">
-                                    <p><strong>{item.name}</strong></p>
-                                    <p className="product-category">{item.category} • {item.brand} • Size {item.size}</p>
-                                    <p className="product-condition">Condition: {item.condition}</p>
-                                    <p className="product-value">Estimated Value: ${item.estimatedValue}</p>
-                                    <p className="product-points">Points Required: {item.pointsRequired} points</p>
-                                    <div className="description-text">
-                                        <p>{item.description}</p>
+                {/* Main Product Section - Images and Description */}
+                <div className="main-product-section">
+                    <div className="main-details-grid">
+                        {/* Left Column - Image Gallery */}
+                        <div className="image-gallery-section">
+                            <div className="main-image-container">
+                                {item.images && item.images.length > 0 ? (
+                                    <>
+                                        <img
+                                            src={item.images[currentImageIndex]}
+                                            alt={item.name}
+                                            className="main-image"
+                                        />
+                                        {item.images.length > 1 && (
+                                            <>
+                                                <button
+                                                    className="image-nav prev"
+                                                    onClick={handlePreviousImage}
+                                                >
+                                                    &#8249;
+                                                </button>
+                                                <button
+                                                    className="image-nav next"
+                                                    onClick={handleNextImage}
+                                                >
+                                                    &#8250;
+                                                </button>
+                                            </>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div className="add-images-placeholder">
+                                        <span className="placeholder-icon">📷</span>
+                                        <p>Add Images</p>
                                     </div>
-                                    {item.tags && (
-                                        <div className="product-tags">
-                                            {item.tags.map((tag, index) => (
-                                                <span key={index} className="tag">{tag}</span>
-                                            ))}
-                                        </div>
-                                    )}
+                                )}
+                            </div>
+
+                            {/* Image Thumbnails */}
+                            {item.images && item.images.length > 1 && (
+                                <div className="image-thumbnails">
+                                    {item.images.map((image, index) => (
+                                        <img
+                                            key={index}
+                                            src={image}
+                                            alt={`${item.name} ${index + 1}`}
+                                            className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                                            onClick={() => handleImageSelect(index)}
+                                        />
+                                    ))}
                                 </div>
                             )}
                         </div>
 
-                        {/* Action Buttons */}
-                        {item.isAvailable && (
-                            <div className="action-buttons">
-                                <button
-                                    className="action-btn primary swap-btn"
-                                    onClick={handleSwapRequest}
-                                >
-                                    Request Swap
-                                </button>
-                                <button
-                                    className={`action-btn secondary points-btn ${userPoints < item.pointsRequired ? 'disabled' : ''}`}
-                                    onClick={handleRedeemPoints}
-                                    disabled={userPoints < item.pointsRequired}
-                                >
-                                    Redeem via Points
+                        {/* Right Column - Product Information */}
+                        <div className="product-info-section">
+                            {/* Availability Status */}
+                            <div className="availability-status">
+                                <button className={`availability-btn ${item.isAvailable ? 'available' : 'unavailable'}`}>
+                                    {item.isAvailable ? 'Available/Swap' : 'Currently Unavailable'}
                                 </button>
                             </div>
-                        )}
+
+                            {/* Product Description */}
+                            <div className={`product-description-box ${item ? 'has-content' : ''}`}>
+                                <h3>Add Product Description</h3>
+                                <div className="description-lines">
+                                    <div className="description-line full"></div>
+                                    <div className="description-line full"></div>
+                                    <div className="description-line full"></div>
+                                    <div className="description-line full"></div>
+                                    <div className="description-line medium"></div>
+                                    <div className="description-line full"></div>
+                                    <div className="description-line full"></div>
+                                    <div className="description-line short"></div>
+                                </div>
+
+                                {/* Actual Description Content */}
+                                {item && (
+                                    <div className="actual-description">
+                                        <p><strong>{item.name}</strong></p>
+                                        <p className="product-category">{item.category} • {item.brand} • Size {item.size}</p>
+                                        <p className="product-condition">Condition: {item.condition}</p>
+                                        <p className="product-value">Estimated Value: ${item.estimatedValue}</p>
+                                        <p className="product-points">Points Required: {item.pointsRequired} points</p>
+                                        <div className="description-text">
+                                            <p>{item.description}</p>
+                                        </div>
+                                        {item.tags && (
+                                            <div className="product-tags">
+                                                {item.tags.map((tag, index) => (
+                                                    <span key={index} className="tag">{tag}</span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Action Buttons */}
+                            {item.isAvailable && (
+                                <div className="action-buttons">
+                                    <button
+                                        className="action-btn primary swap-btn"
+                                        onClick={handleSwapRequest}
+                                    >
+                                        Request Swap
+                                    </button>
+                                    <button
+                                        className={`action-btn secondary points-btn ${userPoints < item.pointsRequired ? 'disabled' : ''}`}
+                                        onClick={handleRedeemPoints}
+                                        disabled={userPoints < item.pointsRequired}
+                                    >
+                                        Redeem via Points
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 
-                {/* Previous Listings Section - Matching Wireframe */}
-                <div className="previous-listings-section">
-                    <h3>Previous Listings:</h3>
-                    <div className="previous-listings-grid">
-                        {[1, 2, 3, 4].map((index) => (
-                            <div key={index} className="listing-preview">
-                                <div className="listing-image-placeholder">
-                                    <span className="placeholder-icon">📷</span>
+                {/* Previous Listings Section */}
+                <div className="previous-listings-wrapper">
+                    <div className="previous-listings-section">
+                        <h3>Previous Listings:</h3>
+                        <div className="previous-listings-grid">
+                            {[1, 2, 3, 4].map((index) => (
+                                <div key={index} className="listing-preview">
+                                    <div className="listing-image-placeholder">
+                                        <span className="placeholder-icon">📷</span>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

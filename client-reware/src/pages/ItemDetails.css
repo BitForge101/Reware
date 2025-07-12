@@ -101,6 +101,28 @@
     z-index: 1;
 }
 
+/* Main Product Section - Contains images and description */
+.main-product-section {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--border-secondary);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-secondary);
+    position: relative;
+}
+
+/* Previous Listings Wrapper - Separate section */
+.previous-listings-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--border-secondary);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-secondary);
+}
+
 /* Main Details Grid - Two Column Layout */
 .main-details-grid {
     display: grid;
@@ -516,10 +538,10 @@
     box-shadow: var(--shadow-hover);
 }
 
-/* Previous Listings Section - Matching Wireframe */
+/* Previous Listings Section */
 .previous-listings-section {
-    margin-top: 3rem;
-    padding: 0 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 .previous-listings-section h3 {
@@ -533,8 +555,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .listing-preview {
@@ -807,9 +828,6 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
     position: relative;
     z-index: 1;
 }
@@ -1508,7 +1526,7 @@
 .modal-btn:focus-visible,
 .thumbnail:focus-visible,
 .image-nav:focus-visible {
-    outline: 3px solid var(--color-primary);
+    outline: 3px solid var(--color_primary);
     outline-offset: 2px;
 }
 
