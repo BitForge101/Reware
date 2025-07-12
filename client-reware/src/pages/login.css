@@ -2,7 +2,7 @@
 
 .login-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #A695FF 20%, #FFFFFF 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,10 +13,11 @@
 .login-card {
   max-width: 24rem;
   width: 100%;
-  background: white;
+  background: #FFFFFF;
   border-radius: 1rem;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   overflow: hidden;
+  border: 2px solid rgba(166, 149, 255, 0.2);
 }
 
 .login-form {
@@ -30,6 +31,7 @@
   text-align: center;
   margin-bottom: 1rem;
 }
+
 .logo-image {
   width: 5rem;
   height: 5rem;
@@ -43,7 +45,7 @@
 .logo-icon {
   width: 4rem;
   height: 4rem;
-  background: #dcfce7;
+  background: rgba(166, 149, 255, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -54,14 +56,14 @@
 .user-icon {
   width: 2rem;
   height: 2rem;
-  color: #16a34a;
+  color: #A695FF;
   stroke-width: 2;
 }
 
 .title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #111827;
+  color: #000000;
   margin: 0 0 0.5rem 0;
 }
 
@@ -80,7 +82,7 @@
 .form-label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
+  color: #000000;
 }
 
 .form-input {
@@ -95,8 +97,8 @@
 
 .form-input:focus {
   outline: none;
-  border-color: #16a34a;
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+  border-color: #A695FF;
+  box-shadow: 0 0 0 3px rgba(166, 149, 255, 0.1);
 }
 
 .form-input::placeholder {
@@ -117,8 +119,8 @@
 .submit-button {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: #16a34a;
-  color: white;
+  background: #A695FF;
+  color: #FFFFFF;
   border: none;
   border-radius: 0.5rem;
   font-weight: 500;
@@ -128,9 +130,9 @@
 }
 
 .submit-button:hover {
-  background: #15803d;
+  background: #000000;
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(22, 163, 74, 0.2);
+  box-shadow: 0 4px 8px rgba(166, 149, 255, 0.2);
 }
 
 .submit-button:active {
@@ -150,14 +152,14 @@
 }
 
 .signup-link {
-  color: #16a34a;
+  color: #A695FF;
   font-weight: 500;
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 .signup-link:hover {
-  color: #15803d;
+  color: #000000;
 }
 
 /* Responsive Design */
@@ -165,11 +167,11 @@
   .login-container {
     padding: 1rem;
   }
-  
+
   .login-form {
     padding: 1.5rem;
   }
-  
+
   .title {
     font-size: 1.25rem;
   }
@@ -178,7 +180,7 @@
 /* Focus visible for accessibility */
 .form-input:focus-visible,
 .submit-button:focus-visible {
-  outline: 2px solid #16a34a;
+  outline: 2px solid #A695FF;
   outline-offset: 2px;
 }
 
@@ -203,5 +205,5 @@
 .form-input:focus,
 .submit-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+  box-shadow: 0 0 0 3px rgba(166, 149, 255, 0.1);
 }

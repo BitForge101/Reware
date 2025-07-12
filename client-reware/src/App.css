@@ -1,8 +1,36 @@
-
 :root {
+  /* Primary Color Palette */
   --color-primary: #A695FF;
+  --color-secondary: #000000;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-purple: #A695FF;
+
+  /* Background Colors */
   --color-bg: #FFFFFF;
+  --color-bg-secondary: #F8F9FF;
+  --color-bg-gradient: linear-gradient(135deg, #FFFFFF 0%, #F8F9FF 50%, #FFFFFF 100%);
+  --color-bg-gradient-alt: linear-gradient(135deg, #FFFFFF 0%, #A695FF 20%, #FFFFFF 100%);
+
+  /* Text Colors */
   --color-text: #000000;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+
+  /* Purple Variations */
+  --color-purple-light: rgba(166, 149, 255, 0.1);
+  --color-purple-medium: rgba(166, 149, 255, 0.2);
+  --color-purple-dark: #8B7CFF;
+
+  /* Shadow Colors */
+  --shadow-primary: 0 4px 15px rgba(166, 149, 255, 0.2);
+  --shadow-secondary: 0 8px 25px rgba(166, 149, 255, 0.1);
+  --shadow-hover: 0 8px 25px rgba(166, 149, 255, 0.3);
+
+  /* Border Colors */
+  --border-primary: rgba(166, 149, 255, 0.2);
+  --border-secondary: rgba(166, 149, 255, 0.15);
+  --border-light: #e5e7eb;
 }
 
 .App {
@@ -41,6 +69,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
