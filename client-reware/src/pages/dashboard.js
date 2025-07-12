@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
 import './dashboard.css';
+import blazer from '../images/blazer.jpeg';
+import dress from '../images/dress.jpeg'
+import shirt from '../images/shirt.jpeg';
+import suit from '../images/suit.jpg';
+import tshirt from '../images/tshirt.jpeg';
+import pant from '../images/pant.jpg';
+import night from '../images/night.jpeg';
+import top from '../images/top.jpeg';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -73,14 +81,15 @@ User ID: ${userData._id}`);
   ];
 
   const products = [
-    { id: 1, name: 'Elegant Blazer', image: '/images/blazer.jpeg', category: 'Blazers' },
-    { id: 2, name: 'Summer Dress', image: '/images/dress.jpeg', category: 'Dresses' },
-    { id: 3, name: 'Casual Shirt', image: '/images/shirt.jpeg', category: 'Shirts' },
-    { id: 4, name: 'Business Suit', image: '/images/suit.jpg', category: 'Suits' },
-    { id: 5, name: 'Cotton T-Shirt', image: '/images/t-shirt.jpeg', category: 'T-Shirts' },
-    { id: 6, name: 'Formal Pants', image: '/images/pant.jpg', category: 'Pants' },
-    { id: 7, name: 'Night Dress', image: '/images/night.jpeg', category: 'Dresses' },
-    { id: 8, name: 'Women\'s Top', image: '/images/top.jpeg', category: 'Shirts' }
+    { id: 1, name: 'Elegant Blazer', image:blazer, category: 'Blazers' },
+    { id: 2, name: 'Summer Dress', image: dress, category: 'Dresses' },
+    { id: 3, name: 'Casual Shirt', image: shirt, category: 'Shirts' },
+    { id: 4, name: 'Business Suit', image: suit, category: 'Suits' },
+    { id: 5, name: 'Cotton T-Shirt', image: tshirt, category: 'T-Shirts' },
+    { id: 6, name: 'Formal Pants', image: pant, category: 'Pants' },
+    { id: 7, name: 'Night Dress', image: night, category: 'Dresses' },
+    { id: 8, name: 'Women\'s Top', image: top, category: 'Shirts' }
+
   ];
 
   return (
@@ -129,15 +138,15 @@ User ID: ${userData._id}`);
           <h2>Featured Collections</h2>
           <div className="featured-images">
             <div className="featured-image">
-              <img src="/images/blazer.jpeg" alt="Blazers Collection" />
+              <img src={blazer} alt="Blazers Collection" />
               <div className="image-overlay">Blazers</div>
             </div>
             <div className="featured-image">
-              <img src="/images/dress.jpeg" alt="Dresses Collection" />
+              <img src={dress} alt="Dresses Collection" />
               <div className="image-overlay">Dresses</div>
             </div>
             <div className="featured-image">
-              <img src="/images/shirt.jpeg" alt="Shirts Collection" />
+              <img src={shirt} alt="Shirts Collection" />
               <div className="image-overlay">Shirts</div>
             </div>
           </div>
