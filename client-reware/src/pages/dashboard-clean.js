@@ -127,6 +127,7 @@ const Dashboard = () => {
   const handleItemClick = (itemId) => {
     console.log('Item clicked:', itemId);
     // Navigate to item detail page
+    navigate(`/item/${itemId}`);
   };
 
   const getImageUrl = (item) => {
@@ -188,14 +189,14 @@ User ID: ${userData._id}`);
   ];
 
   const sampleProducts = [
-    { id: 1, name: 'Elegant Blazer', image: blazer, category: 'Blazers' },
-    { id: 2, name: 'Summer Dress', image: dress, category: 'Dresses' },
-    { id: 3, name: 'Casual Shirt', image: shirt, category: 'Shirts' },
-    { id: 4, name: 'Business Suit', image: suit, category: 'Suits' },
-    { id: 5, name: 'Cotton T-Shirt', image: tshirt, category: 'T-Shirts' },
-    { id: 6, name: 'Formal Pants', image: pant, category: 'Pants' },
-    { id: 7, name: 'Night Dress', image: night, category: 'Dresses' },
-    { id: 8, name: 'Women\'s Top', image: top, category: 'Shirts' }
+    { id: 1, name: 'Elegant Blazer', image: blazer, category: 'Blazers', price: 89, description: 'Professional blazer in excellent condition' },
+    { id: 2, name: 'Summer Dress', image: dress, category: 'Dresses', price: 65, description: 'Beautiful summer dress, perfect for warm weather' },
+    { id: 3, name: 'Casual Shirt', image: shirt, category: 'Shirts', price: 45, description: 'Comfortable casual shirt for everyday wear' },
+    { id: 4, name: 'Business Suit', image: suit, category: 'Suits', price: 250, description: 'Complete business suit for professional occasions' },
+    { id: 5, name: 'Cotton T-Shirt', image: tshirt, category: 'T-Shirts', price: 25, description: 'Soft cotton t-shirt in great condition' },
+    { id: 6, name: 'Formal Pants', image: pant, category: 'Pants', price: 55, description: 'Tailored formal pants for business wear' },
+    { id: 7, name: 'Night Dress', image: night, category: 'Dresses', price: 85, description: 'Elegant evening dress for special occasions' },
+    { id: 8, name: 'Women\'s Top', image: top, category: 'Shirts', price: 35, description: 'Stylish women\'s top, versatile and comfortable' }
   ];
 
   // Use backend data if available, otherwise fall back to sample data
@@ -303,6 +304,15 @@ User ID: ${userData._id}`);
                   <p className="product-category">{item.category}</p>
                   {item.price && <p className="product-price">${item.price}</p>}
                   {item.description && <p className="product-description">{item.description}</p>}
+                  <button
+                    className="product-action-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleItemClick(item.id || index);
+                    }}
+                  >
+                    View Details
+                  </button>
                 </div>
               </div>
             ))}

@@ -7,6 +7,7 @@ import Signup from './pages/signup';
 import Dashboard from './pages/dashboard';
 import UserDashboard from './pages/UserDashboard';
 import UploadItem from './pages/UploadItem';
+import ItemDetails from './pages/ItemDetails';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -37,6 +38,14 @@ function App() {
         element={
           <ProtectedRoute>
             <UploadItem />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/item/:itemId"
+        element={
+          <ProtectedRoute>
+            <ItemDetails />
           </ProtectedRoute>
         }
       />
