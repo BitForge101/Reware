@@ -17,23 +17,50 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    // Get current user data or create mock data if not available
-    const currentUser = authService.getCurrentUser();
-    if (currentUser) {
-      setUser(currentUser);
-    } else {
-      // Set mock user data for testing/demo purposes
-      setUser({
-        firstName: 'Demo',
-        lastName: 'User',
-        email: 'demo@example.com',
-        username: 'demouser',
-        _id: 'demo123',
-        phoneNumber: '+1234567890',
-        createdAt: new Date().toISOString(),
-        points: 25
-      });
-    }
+    const checkAuthentication = async () => {
+      // Check if token exists in localStorage
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+        // No token, redirect to login
+        navigate('/login');
+        return;
+      }
+
+      try {
+        // Verify token with backend by fetching user profile
+        const response = await fetch('http://localhost:5000/api/auth/profile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.user) {
+            // Token is valid and user exists in database
+            setUser(data.user);
+          } else {
+            // Invalid response, clear storage and redirect
+            localStorage.clear();
+            navigate('/login');
+          }
+        } else {
+          // Token is invalid or expired, clear storage and redirect
+          localStorage.clear();
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Authentication check failed:', error);
+        // Network error or server error, clear storage and redirect
+        localStorage.clear();
+        navigate('/login');
+      }
+    };
+
+    checkAuthentication();
   }, [navigate]);
 
   const handleLogout = () => {

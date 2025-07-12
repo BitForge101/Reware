@@ -10,9 +10,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+<<<<<<< Updated upstream
       <Route path="/dashboard" element={<Dashboard />} />
       <Route 
         path="/userDashboard" 
@@ -23,6 +24,17 @@ function App() {
         } 
       />
       {/* Add more routes here */}
+=======
+      <Route 
+        path="/dashboard" 
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } 
+      />
+      {/* Add more protected routes here */}
+>>>>>>> Stashed changes
     </Routes>
   );
 }

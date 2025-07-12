@@ -9,7 +9,7 @@ class AuthService {
       
       if (response.success && response.token) {
         // Store token and user data
-        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('isLoggedIn', 'true');
       }
@@ -27,7 +27,7 @@ class AuthService {
       
       if (response.success && response.token) {
         // Store token and user data
-        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('isLoggedIn', 'true');
       }
@@ -40,14 +40,14 @@ class AuthService {
 
   // Logout user
   logout() {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('isLoggedIn');
   }
 
   // Check if user is authenticated
   isAuthenticated() {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     return !!(token && isLoggedIn);
   }
@@ -60,7 +60,7 @@ class AuthService {
 
   // Get auth token
   getToken() {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('token');
   }
 
   // Check if token is expired (basic check)

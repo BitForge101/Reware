@@ -25,14 +25,37 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
 
-    // Dummy login check
-    if (form.username === 'admin' && form.password === 'admin123') {
-      // Save dummy token or flag
-      localStorage.setItem('isLoggedIn', true);
-      navigate('/dashboard'); // redirect after login
-    } else {
-      setError('Invalid username or password');
+    try {
+      console.log('Attempting login with:', form);
+      
+      // Determine if input is email or username
+      const isEmail = form.usernameOrEmail.includes('@');
+      const loginData = {
+        password: form.password,
+        ...(isEmail ? { email: form.usernameOrEmail } : { username: form.usernameOrEmail })
+      };
+
+      console.log('Login data being sent:', loginData);
+      
+      const response = await authService.login(loginData);
+      
+      if (response.success) {
+        console.log('Login successful:', response);
+        // Store token and redirect
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        navigate('/dashboard');
+      } else {
+        setError(response.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError(error.message || 'An error occurred during login');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -48,17 +71,17 @@ const Login = () => {
             <p className="subtitle">Sign in to your ReWear account</p>
           </div>
 
-        {/* Username */}
+        {/* Username/Email */}
         <div className="form-group">
           <label className="form-label">
-            Username
+            Username or Email
           </label>
           <input
             type="text"
-            name="username"
-            value={form.username}
+            name="usernameOrEmail"
+            value={form.usernameOrEmail}
             onChange={handleChange}
-            placeholder="Enter your username"
+            placeholder="Enter your username or email"
             className="form-input"
             required
           />
@@ -85,8 +108,9 @@ const Login = () => {
         <button
           type="submit"
           className="submit-button"
+          disabled={isLoading}
         >
-          Sign In
+          {isLoading ? 'Signing In...' : 'Sign In'}
         </button>
 
           {/* Signup Link */}
