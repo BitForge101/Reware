@@ -20,7 +20,7 @@ const Dashboard = () => {
     const checkAuthentication = async () => {
       // Check if token exists in localStorage
       const token = localStorage.getItem('token');
-      
+
       if (!token) {
         // No token, redirect to login
         navigate('/login');
@@ -81,7 +81,7 @@ const Dashboard = () => {
     console.log('User Data:', localStorage.getItem('user'));
     console.log('Parsed User:', JSON.parse(localStorage.getItem('user') || '{}'));
     console.log('All Local Storage:', localStorage);
-    
+
     // Also show in alert for quick viewing
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     alert(`Local Storage Data:
@@ -108,7 +108,7 @@ User ID: ${userData._id}`);
   ];
 
   const products = [
-    { id: 1, name: 'Elegant Blazer', image:blazer, category: 'Blazers' },
+    { id: 1, name: 'Elegant Blazer', image: blazer, category: 'Blazers' },
     { id: 2, name: 'Summer Dress', image: dress, category: 'Dresses' },
     { id: 3, name: 'Casual Shirt', image: shirt, category: 'Shirts' },
     { id: 4, name: 'Business Suit', image: suit, category: 'Suits' },
@@ -125,15 +125,21 @@ User ID: ${userData._id}`);
         <div className="dashboard-nav">
           <h1 className="dashboard-title">ReWear</h1>
           <div className="header-actions">
-            <button 
+            <button
               onClick={showLocalStorageData}
               className="debug-button"
               title="Show Local Storage Data"
             >
               📊 Debug
             </button>
-            <span className="user-greeting">Hello, {user.firstName}!</span>
-            <button 
+            <span
+              className="user-greeting clickable-username"
+              onClick={() => navigate('/user-dashboard')}
+              title="Click to view your profile"
+            >
+              Hello, {user.firstName}!
+            </span>
+            <button
               onClick={handleLogout}
               className="logout-button"
             >
