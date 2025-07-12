@@ -17,7 +17,14 @@
     "type": "git",
     "url": "git+https://github.com/BitForge101/Reware.git"
   },
-  "keywords": ["reware", "fashion", "sustainability", "clothing", "swap", "marketplace"],
+  "keywords": [
+    "reware",
+    "fashion",
+    "sustainability",
+    "clothing",
+    "swap",
+    "marketplace"
+  ],
   "author": "ReWear Team",
   "license": "ISC",
   "type": "commonjs",
@@ -27,5 +34,9 @@
   "homepage": "https://github.com/BitForge101/Reware#readme",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
