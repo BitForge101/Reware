@@ -26,6 +26,7 @@ const Dashboard = () => {
 
   useEffect(() => {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     const checkAuthentication = async () => {
       // Check if token exists in localStorage
       const token = localStorage.getItem('token');
@@ -36,10 +37,15 @@ const Dashboard = () => {
         return;
       }
 =======
+=======
+>>>>>>> Stashed changes
     const initializeDashboard = async () => {
       await checkAuthentication();
       await fetchDashboardData();
     };
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     initializeDashboard();
@@ -166,9 +172,13 @@ const Dashboard = () => {
     console.log('User Data:', localStorage.getItem('user'));
     console.log('Parsed User:', JSON.parse(localStorage.getItem('user') || '{}'));
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     console.log('All Local Storage:', localStorage);
 
     // Also show in alert for quick viewing
+=======
+    
+>>>>>>> Stashed changes
 =======
     
 >>>>>>> Stashed changes
@@ -212,6 +222,7 @@ User ID: ${userData._id}`);
   }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   // Sample data for demonstration
   const categories = [
     'Shirts', 'Dresses', 'Pants', 'Blazers', 'T-Shirts', 'Suits'
@@ -231,6 +242,8 @@ User ID: ${userData._id}`);
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   return (
     <div className="dashboard-container">
       {/* Header */}
@@ -238,6 +251,7 @@ User ID: ${userData._id}`);
         <nav className="dashboard-nav">
           <h1 className="dashboard-title">ReWear</h1>
           <div className="header-actions">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
             <button
               onClick={showLocalStorageData}
@@ -257,6 +271,15 @@ User ID: ${userData._id}`);
               onClick={handleLogout}
               className="logout-button"
             >
+=======
+            <span className="user-greeting">
+              Welcome back, {user.firstName}!
+            </span>
+            <button onClick={showLocalStorageData} className="debug-button">
+              Debug Info
+            </button>
+            <button onClick={handleLogout} className="logout-button">
+>>>>>>> Stashed changes
 =======
             <span className="user-greeting">
               Welcome back, {user.firstName}!
