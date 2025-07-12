@@ -10,17 +10,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route 
-        path="/dashboard" 
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        } 
-      />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route 
         path="/userDashboard" 
         element={
@@ -29,7 +22,7 @@ function App() {
           // </ProtectedRoute>
         } 
       />
-      {/* Add more protected routes here */}
+      {/* Add more routes here */}
     </Routes>
   );
 }
