@@ -100,7 +100,7 @@ User ID: ${userData._id}`);
   }
 
   // Sample data for demonstration
-  const categories = [
+  const demoCategories = [
     'Shirts', 'Dresses', 'Pants', 'Blazers', 'T-Shirts', 'Suits'
   ];
 
@@ -180,7 +180,7 @@ User ID: ${userData._id}`);
         <div className="categories-section">
           <h2>Categories</h2>
           <div className="categories-grid">
-            {categories.map((category, index) => (
+            {demoCategories.map((category, index) => (
               <div key={index} className="category-card">
                 <span className="category-name">{category}</span>
               </div>
